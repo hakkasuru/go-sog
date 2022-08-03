@@ -9,7 +9,7 @@ import (
 func TestExampleLogInfo(t *testing.T) {
 	config := slog.NewConfig(
 		"https://hooks.slack.com/services/webhook", // replace with webhook url
-		"Test Title",
+		t.Name(),
 		"<!here>",
 	)
 
@@ -21,7 +21,7 @@ func TestExampleLogInfo(t *testing.T) {
 func TestExampleErrorInfo(t *testing.T) {
 	config := slog.NewConfig(
 		"https://hooks.slack.com/services/webhook", // replace with webhook url
-		"Test Title",
+		t.Name(),
 		"<!here>",
 	)
 
@@ -33,7 +33,7 @@ func TestExampleErrorInfo(t *testing.T) {
 func TestExampleEmergencyInfo(t *testing.T) {
 	config := slog.NewConfig(
 		"https://hooks.slack.com/services/webhook", // replace with webhook url
-		"Test Title",
+		t.Name(),
 		"<!here>",
 	)
 
