@@ -1,2 +1,2 @@
-# go-sog
-Slack Logger in Go
+# Slog
+Simple Go Slack Logger
