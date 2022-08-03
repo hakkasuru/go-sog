@@ -3,8 +3,8 @@ package slogcore
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"net/http"
+	"strings"
 	"time"
 )
 
@@ -50,7 +50,7 @@ func (c *core) Write(url string, title string, msg string, tags []string) error 
 				Type: section,
 				Text: block{
 					Type: markdown,
-					Text: fmt.Sprint(tags),
+					Text: strings.Join(tags, " "),
 				},
 			},
 		},
