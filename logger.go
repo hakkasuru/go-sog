@@ -18,10 +18,10 @@ func NewNoopLogger() *Logger {
 	}
 }
 
-func NewLogger(cfg Config) *Logger {
+func NewSlackLogger(cfg Config) *Logger {
 	return &Logger{
 		config: cfg,
-		core:   core.NewCore(),
+		core:   core.NewSlackCore(),
 	}
 }
 
