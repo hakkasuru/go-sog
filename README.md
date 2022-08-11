@@ -14,5 +14,5 @@ config := slog.NewConfig(
     "<!here>",
 )
 logger := slog.NewSlackLogger(config)
-logger.Error("API returned http status %d", code)
+logger.Error("API returned http status %d", 500)
 ```
