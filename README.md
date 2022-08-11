@@ -10,7 +10,7 @@ go get -u github.com/hakkasuru/slog
 ```go
 config := slog.NewConfig(
     "<webhook url>",
-    t.Name(),
+    "TestExampleLogInfo",
     "<!here>",
 )
 logger := slog.NewSlackLogger(config)
