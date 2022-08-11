@@ -3,25 +3,25 @@ package slog
 import (
 	"fmt"
 
-	"github.com/hakkasuru/slog/slogcore"
+	"github.com/hakkasuru/slog/core"
 )
 
 type Logger struct {
 	config Config
-	core   slogcore.Core
+	core   core.Core
 }
 
 func NewNoopLogger() *Logger {
 	return &Logger{
 		config: Config{},
-		core:   slogcore.NewNoopCore(),
+		core:   core.NewNoopCore(),
 	}
 }
 
 func NewLogger(cfg Config) *Logger {
 	return &Logger{
 		config: cfg,
-		core:   slogcore.NewCore(),
+		core:   core.NewCore(),
 	}
 }
 

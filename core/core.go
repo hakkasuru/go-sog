@@ -1,4 +1,4 @@
-package slogcore
+package core
 
 import (
 	"bytes"
