@@ -3,7 +3,9 @@ package slogcore
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"net/http"
+	"runtime"
 	"strings"
 	"time"
 )
@@ -30,6 +32,33 @@ func NewCore() Core {
 }
 
 func (c *core) Write(url string, title string, msg string, tags []string) error {
+	var callerPayload block
+
+	_, filename, line, ok := runtime.Caller(3)
+	if ok {
+		callerPayload = block{
+			Type: section,
+			Fields: []interface{}{
+				block{
+					Type: markdown,
+					Text: fmt.Sprintf("*File*\n%s", filename),
+				},
+				block{
+					Type: markdown,
+					Text: fmt.Sprintf("*Line*\n%d", line),
+				},
+			},
+		}
+	}
+
+	tagsPayload := block{
+		Type: section,
+		Text: block{
+			Type: markdown,
+			Text: strings.Join(tags, " "),
+		},
+	}
+
 	payload := payload{
 		Blocks: blocks{
 			block{
@@ -46,13 +75,8 @@ func (c *core) Write(url string, title string, msg string, tags []string) error 
 					Text: msg,
 				},
 			},
-			block{
-				Type: section,
-				Text: block{
-					Type: markdown,
-					Text: strings.Join(tags, " "),
-				},
-			},
+			callerPayload,
+			tagsPayload,
 		},
 	}
 
