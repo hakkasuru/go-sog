@@ -57,5 +57,9 @@ func TestExampleInitGlobalLogger(t *testing.T) {
 }
 
 func TestExampleNoopGlobalLogger(t *testing.T) {
+	logger := slog.NewNoopLogger()
+
+	slog.ReplaceGlobalLogger(logger)
+
 	slog.L().Info("test message")
 }
