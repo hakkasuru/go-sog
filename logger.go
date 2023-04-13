@@ -46,6 +46,6 @@ func (l *Logger) write(title string, msg string, tags []string) {
 	allTags := append(l.config.DefaultTags, tags...)
 	err := l.core.Write(l.config.WebhookURL, title, msg, allTags)
 	if err != nil {
-		log.New(os.Stderr, "[ERROR]", log.LstdFlags).Printf("%v", err)
+		log.New(os.Stderr, "[ERROR] ", log.LstdFlags).Printf("%v", err)
 	}
 }
