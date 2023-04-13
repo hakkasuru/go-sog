@@ -22,6 +22,7 @@ func NewSlackCore() Core {
 	}
 }
 
+// Write message into payload and publish to slack webhook
 func (c *slackCore) Write(url string, title string, msg string, tags []string) error {
 	var callerPayload block
 
