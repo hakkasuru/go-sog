@@ -2,6 +2,8 @@ package slog
 
 import (
 	"fmt"
+	"log"
+	"os"
 
 	"github.com/hakkasuru/slog/core"
 )
@@ -42,5 +44,8 @@ func (l *Logger) Emergency(msg string, tags ...string) {
 
 func (l *Logger) write(title string, msg string, tags []string) {
 	allTags := append(l.config.DefaultTags, tags...)
-	l.core.Write(l.config.WebhookURL, title, msg, allTags)
+	err := l.core.Write(l.config.WebhookURL, title, msg, allTags)
+	if err != nil {
+		log.New(os.Stderr, "[ERROR]", log.LstdFlags).Printf("%v", err)
+	}
 }
