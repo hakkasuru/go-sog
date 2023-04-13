@@ -44,34 +44,40 @@ func (c *slackCore) Write(url string, title string, msg string, tags []string) e
 		}
 	}
 
-	tagsPayload := block{
-		Type: section,
-		Text: block{
-			Type: markdown,
-			Text: strings.Join(tags, " "),
-		},
-	}
-
-	payload := payload{
-		Blocks: blocks{
-			block{
-				Type: header,
-				Text: block{
-					Type: plaintext,
-					Text: title,
-				},
+	var blocks blocks
+	blocks = append(
+		blocks,
+		block{
+			Type: header,
+			Text: block{
+				Type: plaintext,
+				Text: title,
 			},
+		},
+		block{
+			Type: section,
+			Text: block{
+				Type: markdown,
+				Text: msg,
+			},
+		},
+		callerPayload,
+	)
+
+	if len(tags) > 0 {
+		blocks = append(
+			blocks,
 			block{
 				Type: section,
 				Text: block{
 					Type: markdown,
-					Text: msg,
+					Text: strings.Join(tags, " "),
 				},
 			},
-			callerPayload,
-			tagsPayload,
-		},
+		)
 	}
+
+	payload := payload{Blocks: blocks}
 
 	data, marshalErr := json.Marshal(payload)
 	if marshalErr != nil {
