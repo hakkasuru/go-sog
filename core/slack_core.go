@@ -14,6 +14,7 @@ type slackCore struct {
 	httpClient *http.Client
 }
 
+// NewSlackCore slack core implementation
 func NewSlackCore() Core {
 	return &slackCore{
 		httpClient: &http.Client{

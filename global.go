@@ -9,6 +9,7 @@ var (
 	_globalL  = NewNoopLogger()
 )
 
+// ReplaceGlobalLogger replaces global logger
 func ReplaceGlobalLogger(logger *Logger) func() {
 	_globalMu.Lock()
 	prevLogger := _globalL
@@ -17,6 +18,7 @@ func ReplaceGlobalLogger(logger *Logger) func() {
 	return func() { ReplaceGlobalLogger(prevLogger) }
 }
 
+// L global logger
 func L() *Logger {
 	_globalMu.RLock()
 	l := _globalL
